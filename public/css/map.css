@@ -1,0 +1,11 @@
+/*
+ * Stylesheet for map element
+ * 6 July 2021, SpyCop
+ */
+html, body { /* necessary for using percentages on #map */
+	height: 100%;
+	width:  100%;
+}
+#map {
+	height: 80%;
+}
