@@ -1,0 +1,15 @@
+{
+  "name": "cleanup-logger",
+  "version": "0.0.1",
+  "description": "Web application for visual logging of stray litter on OSM",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SpyCop",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.2",
+    "path": "^0.12.7"
+  }
+}
