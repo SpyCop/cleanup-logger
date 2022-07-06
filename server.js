@@ -4,12 +4,14 @@ var path = require('path');
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-var middleware = require(path.join(__dirname, '/middleware.js'));
+var middleware = require(path.join(__dirname, 'middleware.js'));
 
 app.use(middleware.logger);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', function (req, res) {
-	res.sendFile(path.join(__dirname, '/public/index.html'));
+	res.redirect(' index.html');
 });
 
 app.listen(PORT, function () {
