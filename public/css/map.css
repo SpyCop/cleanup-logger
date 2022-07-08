@@ -1,11 +1,18 @@
 /*
  * Stylesheet for map element
- * 6 July 2021, SpyCop
+ * 8 July 2021, SpyCop
  */
-html, body { /* necessary for using percentages on #map */
+html { /* necessary for using percentages on #map */
 	height: 100%;
 	width:  100%;
+	margin: 0px;
+}
+body { /* get rid of vertical page overflow */
+	height: 95%;
+	width: auto;
+	padding: 0px 6px 0px 6px;
 }
 #map {
 	height: 80%;
+	width: auto;
 }

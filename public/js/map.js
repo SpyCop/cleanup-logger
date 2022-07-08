@@ -1,6 +1,6 @@
 /*
  * Javascript for the Leaflet map
- * 7 July 2021, SpyCop
+ * 8 July 2021, SpyCop
  */
 
 var map = L.map('map').setView([52.045, 5.64], 17); // center map on home
@@ -13,15 +13,15 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 // add Leaflet-Geoman controls with some options to the map
 map.pm.addControls({
-  position: 'topleft',
-  drawMarker: false,
-  drawCircleMarker: false,
-  drawPolyline: false,
-  drawRectangle: false,
-  drawCircle: false,
-  drawText: false,
-  cutPolygon: false,
-  rotateMode: false,
-  // remove following line when implementing editing
-  editControls: false
+    position: 'topleft',
+    drawMarker: false,
+    drawCircleMarker: false,
+    drawPolyline: false,
+    drawRectangle: false,
+    drawCircle: false,
+    drawText: false,
+    cutPolygon: false,
+    rotateMode: false,
+    // remove following line when implementing editing
+    editControls: false
 });
