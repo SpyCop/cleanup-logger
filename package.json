@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.2",
+    "package.json": "^0.0.0",
     "path": "^0.12.7",
     "serve-favicon": "^2.5.0"
   }
