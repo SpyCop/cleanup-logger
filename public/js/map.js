@@ -1,6 +1,6 @@
 /*
- * Javascript for the Leaflet map
- * 8 July 2021, SpyCop
+ * Javascript for the Leaflet map client
+ * 14 Sept 2021, SpyCop
  */
 
 var map = L.map('map').setView([52.045, 5.64], 17); // center map on home
@@ -24,4 +24,20 @@ map.pm.addControls({
     rotateMode: false,
     // remove following line when implementing editing
     editControls: false
+});
+
+// listen to when a layer is finished
+map.on('pm:create', function (event) {
+  var polygon = event.layer.toGeoJSON();
+
+  // POST the polygon to the backend
+  axios({
+        method: 'post',
+        url: '/api/add_polygon',
+        data: polygon
+    }).then(function (res) {
+        console.log(res);
+    }).catch(function (err) {
+        console.log(err);
+    });
 });
