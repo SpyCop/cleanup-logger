@@ -26,18 +26,57 @@ map.pm.addControls({
     editControls: false
 });
 
+var newestPolygon; // temp variable for saving last drawn layer
+
 // listen to when a layer is finished
 map.on('pm:create', function (event) {
-  var polygon = event.layer.toGeoJSON();
+    newestPolygon = event.layer;
 
-  // POST the polygon to the backend
-  axios({
+    toggleModal(); // show modal for user input
+});
+
+// shows or hides the form modal
+function toggleModal () {
+    mdl = document.getElementById("modalContainer");
+    mdl.style.visibility = (mdl.style.visibility == "visible") ? "hidden" : "visible";
+}
+
+// cancel the form and drawing action
+function cancelForm () {
+    toggleModal(); // hide the form modal
+    var form = document.getElementById('userDataForm');
+    form.reset(); // reset the form fields
+
+    // also remove drawn layer
+    map.removeLayer(newestPolygon);
+}
+
+// simulate post behavior of form, preventing redirect
+function sendFormData (submitEvent) {
+    submitEvent.preventDefault();
+    toggleModal(); // hide modal
+
+    var form = document.getElementById('userDataForm');
+
+    var userData = {};
+    userData.feature = newestPolygon.toGeoJSON();
+    userData.name = form.elements.name.value;
+    userData.amount = form.elements.amount.value;
+    userData.notes = form.elements.notes.value;
+
+    // POST the polygon to the backend
+    axios({
         method: 'post',
         url: '/api/add_polygon',
-        data: polygon
+        data: userData
     }).then(function (res) {
+        form.reset();
         console.log(res);
     }).catch(function (err) {
         console.log(err);
     });
-});
+}
+
+// find form and add submit listener
+var form = document.getElementById("userDataForm");
+form.addEventListener("submit", sendFormData, true);
