@@ -52,24 +52,28 @@ function cancelForm () {
 }
 
 // simulate post behavior of form, preventing redirect
-function sendFormData (submitEvent) {
+function sendPolygonData (submitEvent) {
     submitEvent.preventDefault();
     toggleModal(); // hide modal
 
     var form = document.getElementById('userDataForm');
 
-    var userData = {};
-    userData.feature = newestPolygon.toGeoJSON();
-    userData.name = form.elements.name.value;
-    userData.amount = form.elements.amount.value;
-    userData.notes = form.elements.notes.value;
+    var polygonJSON = newestPolygon.toGeoJSON();
+    polygonJSON.properties.name = form.elements.name.value;
+    polygonJSON.properties.amount = form.elements.amount.value;
+    polygonJSON.properties.notes = form.elements.notes.value;
+    polygonJSON.properties.datetime = new Date();
 
     // POST the polygon to the backend
     axios({
         method: 'post',
         url: '/api/add_polygon',
-        data: userData
+        data: polygonJSON
     }).then(function (res) {
+        // TODO: catch server side validation errors here
+        // on fail: retoggle the modal, don't reset the form and display the error
+        // on success: reset form and
+        // TODO: add properties to the drawn layer and add click event to display them
         form.reset();
         console.log(res);
     }).catch(function (err) {
@@ -79,4 +83,4 @@ function sendFormData (submitEvent) {
 
 // find form and add submit listener
 var form = document.getElementById("userDataForm");
-form.addEventListener("submit", sendFormData, true);
+form.addEventListener("submit", sendPolygonData, true);

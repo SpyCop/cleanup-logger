@@ -25,16 +25,19 @@ app.get('/', function (req, res) {
 
 /* POST /api/add_polygon
 {
-  feature: '{"type":"Feature","properties":{},"geometry":{"type":"Polygon","coordinates":[Array]}}',
-  name: 'R2D2',
-  amount: '42',
-  notes: 'The Answer'
+  feature: '{"type":"Feature","properties":{
+    name: 'R2D2',
+    amount: '42',
+    notes: 'The Answer',
+    datetime: '2022-09-17T10:31:05.484Z'
+  },"geometry":{"type":"Polygon","coordinates":[Array]}}',
 }
 */
 app.post('/api/add_polygon', function (req, res) {
-	formData = req.body;
-	console.log(formData);
-	// TODO: save feature, picker, amount and notes to database
+	polygonJSON = req.body;
+	console.log(polygonJSON);
+	// TODO: save feature, picker, amount, notes and datetime to database
+	// TODO: add validation for properties, using response status for feedback to client
 	res.send("Polygon added!");
 });
 
